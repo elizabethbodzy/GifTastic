@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(../images/bg.jpeg); 
+    background-repeat: no-repeat;
+    background-size: 1400px auto;
+}
+
+.container{
+    /* margin: 0 15%; */
+    padding: 30px;
+    background-color: white;
+    opacity: 0.9;
+    width: 1200px;
+    height: 1000px
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Notable', sans-serif;
+    padding-bottom: 20px;
+}
+
+#band-form {
+    float: right;
+    padding-top: 100px;
+    background-color:white;
+}
+
+.band{
+    background-color: white;
+  color: grey;
+  border: 2px solid rgb(3, 81, 112);
+  border-radius: 4px;
+  margin-right: 10px;
+  
+}

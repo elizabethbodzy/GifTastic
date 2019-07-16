@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Famous Bands</title>
+  <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Notable&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Band Search</h1>
+
+    <!--Rendered Buttons will be put here -->
+    <div id="buttons-view"></div> 
+
+    <!-- This form will be where users input data about the movies -->
+    <form id="band-form">
+      <label for="band-input">Search for a band</label>
+      <input type="text" id="band-input"><br>
+
+      <!-- This button will trigger our AJAX call -->
+      <input id="add-band" type="submit" value="Band Search">
+    </form>
+
+    <!-- We'll be dumping our JSON contents in here -->
+    <div id="band-view"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+      //Inital array of bands
+      var bands = ["The Beatles", "The Who", "Rolling Stones", "Led Zeppelin"];
+
+      // function displayMovieInfo() {
+      //   var band = $(this).attr("data-name");
+      //   var queryURL = "https://api.giphy.com/v1/gifs/searcg?api_key=e7681c0c69004bfa8e2dae54b6a66dbb&q=bands";
+
+      //   $.ajax({
+      //   url: queryURL,
+      //   method: "GET"
+      // }).then(function(response) {
+
+      // })
+      function renderButtons() {
+        $("#buttons-view").empty();
+
+        for (var i = 0; i < bands.length; i++){
+          var a = $("<button>");
+          a.addClass("band-btn");
+          a.attr("data-name", bands[i]);
+          a.text(bands[i]);
+          $("#buttons-view").append(a);
+        }
+      }
+
+      $("#add-band").on("click", function(event){
+        event.preventDefault();
+        var band = $("#band-input").val().trim();
+        bands.push(band);
+
+        renderButtons();
+      });
+      
+      // $(document).on("click", ".band-btn", displayBandInfo);
+
+      renderButtons();
+
+      
+      
+
+
+    </script>
+  </div>
+</body>
+
+</html>
