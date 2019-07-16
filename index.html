@@ -29,7 +29,7 @@
     </form>
 
     <!-- We'll be dumping our JSON contents in here -->
-    <div id="band-view"></div>
+    <div id="band-gifs-here"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -37,23 +37,47 @@
       //Inital array of bands
       var bands = ["The Beatles", "The Who", "Rolling Stones", "Led Zeppelin"];
 
-      // function displayMovieInfo() {
-      //   var band = $(this).attr("data-name");
-      //   var queryURL = "https://api.giphy.com/v1/gifs/searcg?api_key=e7681c0c69004bfa8e2dae54b6a66dbb&q=bands";
+      $("#buttons-view").on("click", function() {
+        var rockBand = $(this).attr("data-band");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        rockBand + "&api_key=e7681c0c69004bfa8e2dae54b6a66dbb&limit=10";
+        // "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5"
 
-      //   $.ajax({
-      //   url: queryURL,
-      //   method: "GET"
-      // }).then(function(response) {
+        // var queryURL = "https://api.giphy.com/v1/gifs/search?q=the+beatles&api_key=e7681c0c69004bfa8e2dae54b6a66dbb&limit=10";
 
-      // })
+        $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+        .then(function(response) {
+          console.log(response);
+          var results = response.data;
+
+          for (var i = 0; i < results.length; i++) {
+            var gifDiv = $("<div>");
+
+            var rating = results[i].rating;
+
+            var p = $("<p>").text("Rating: " + rating);
+
+            var bandImage = $("<img>");
+            bandImage.attr("src", results[i].images.fixed_height.url);
+
+            gifDiv.prepend(p);
+            gifDiv.prepend(bandImage);
+
+            $("#band-gifs-here").prepend(gifDiv);
+          }
+      })
+    });
+     
       function renderButtons() {
         $("#buttons-view").empty();
 
         for (var i = 0; i < bands.length; i++){
           var a = $("<button>");
           a.addClass("band-btn");
-          a.attr("data-name", bands[i]);
+          a.attr("data-band", bands[i]);
           a.text(bands[i]);
           $("#buttons-view").append(a);
         }
@@ -66,17 +90,12 @@
 
         renderButtons();
       });
-      
-      // $(document).on("click", ".band-btn", displayBandInfo);
 
       renderButtons();
 
-      
-      
-
-
+    
     </script>
-  </div>
+  
 </body>
 
 </html>
