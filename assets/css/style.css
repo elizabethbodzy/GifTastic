@@ -27,13 +27,27 @@ h1 {
     float: right;
     padding-top: 100px;
     background-color:white;
+    margin-right: 50px;
 }
 
-.band{
-    background-color: white;
+.band-btn{
+  background-color: white;
   color: grey;
   border: 2px solid rgb(3, 81, 112);
   border-radius: 4px;
   margin-right: 10px;
   
+}
+
+#band-input {
+    border: 2px solid rgb(3, 81, 112);
+    border-radius: 4px;
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+#add-band {
+    border-radius: 4px;
+    color: white;
+    background-color:  rgb(3, 81, 112);
 }

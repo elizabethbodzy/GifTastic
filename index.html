@@ -21,7 +21,7 @@
 
     <!-- This form will be where users input data about the movies -->
     <form id="band-form">
-      <label for="band-input">Search for a band</label>
+      <label for="band-input">Search for a band</label> <br>
       <input type="text" id="band-input"><br>
 
       <!-- This button will trigger our AJAX call -->
@@ -37,19 +37,16 @@
       //Inital array of bands
       var bands = ["The Beatles", "The Who", "Rolling Stones", "Led Zeppelin"];
 
-      $("#buttons-view").on("click", function() {
-        var rockBand = $(this).attr("data-band");
+      $("#buttons-view").on("click", ".band-btn", function() {
+        var band = $(this).attr("data-name");
+        console.log(band)
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        rockBand + "&api_key=e7681c0c69004bfa8e2dae54b6a66dbb&limit=10";
-        // "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5"
-
-        // var queryURL = "https://api.giphy.com/v1/gifs/search?q=the+beatles&api_key=e7681c0c69004bfa8e2dae54b6a66dbb&limit=10";
+        band + "&apikey=e7681c0c69004bfa8e2dae54b6a66dbb";
 
         $.ajax({
         url: queryURL,
         method: "GET"
-      })
-        .then(function(response) {
+      }).then(function(response) {
           console.log(response);
           var results = response.data;
 
@@ -68,7 +65,7 @@
 
             $("#band-gifs-here").prepend(gifDiv);
           }
-      })
+      });
     });
      
       function renderButtons() {
@@ -77,9 +74,10 @@
         for (var i = 0; i < bands.length; i++){
           var a = $("<button>");
           a.addClass("band-btn");
-          a.attr("data-band", bands[i]);
+          a.attr("data-name", bands[i]);
           a.text(bands[i]);
           $("#buttons-view").append(a);
+          console.log(bands);
         }
       }
 
@@ -90,12 +88,12 @@
 
         renderButtons();
       });
-
+    
       renderButtons();
 
     
     </script>
-  
+  </div>
 </body>
 
 </html>
