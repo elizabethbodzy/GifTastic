@@ -13,6 +13,8 @@
 
 <body>
 
+  
+
   <div class="container">
     <h1>Band Search</h1>
 
@@ -58,15 +60,33 @@
             var p = $("<p>").text("Rating: " + rating);
 
             var bandImage = $("<img>");
-            bandImage.attr("src", results[i].images.fixed_height.url);
+            bandImage.attr("src", results[i].images.fixed_height_still.url);
+            bandImage.attr("data-still", results[i].images.fixed_height_still.url);
+            bandImage.attr("data-animate", results[i].images.fixed_height.url);
+            bandImage.attr("data-state", "still");
+            bandImage.attr("class", "gif");
 
             gifDiv.prepend(p);
             gifDiv.prepend(bandImage);
 
             $("#band-gifs-here").prepend(gifDiv);
+            
           }
       });
     });
+
+    $(".gif").on("click", function() {
+      var state = $(this).attr("data-state");
+     
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
+    });
+    
      
       function renderButtons() {
         $("#buttons-view").empty();
@@ -87,9 +107,14 @@
         bands.push(band);
 
         renderButtons();
+        
       });
     
       renderButtons();
+      
+      
+      
+      
 
     
     </script>
